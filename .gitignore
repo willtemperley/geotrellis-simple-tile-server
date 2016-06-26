@@ -1,8 +1,3 @@
-index.html
-index.js
-package.html
-lib
-
 project/boot
 project/plugins/project
 project/plugins/target
@@ -33,7 +28,5 @@ _SUCCESS
 .vagrant
 
 lib
-index.html
-index.js
 .ensime*
 tags

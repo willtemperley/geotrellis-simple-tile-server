@@ -1,0 +1,72 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui" />
+<link rel="stylesheet" href="leaflet.css" />
+<script src="leaflet.js"></script>
+<style type="text/css">
+body, #map {
+  height: 100%;
+}
+</style>
+</head>
+<body>
+<div id="map"></div>
+<script>
+  var map = L.map('map');
+
+  map.setView([37.775356, -97.078953], 4);
+
+  new L.tileLayer("http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png").addTo(map);
+
+  classes = new Array();
+  classes["Open Water"] = 11.0;
+  classes["Perennial Ice/Snow"] = 12.0;
+  classes["Developed; Open Space"] = 21.0;
+  classes["Developed; Low Intensity"] = 22.0;
+  classes["Developed; Medium Intensity"] = 23.0;
+  classes["Developed High Intensity"] = 24.0;
+  classes["Barren Land"] = 31.0;
+  classes["Forest Deciduous"] = 41.0;
+  classes["Forest Evergreen"] = 42.0;
+  classes["Mixed Forest"] = 43.0;
+  classes["Dwarf Scrub"] = 51.0;
+  classes["Scrub/Shrub"] = 52.0;
+  classes["Grassland/Herbaceous"] = 71.0;
+  classes["Sedge/Herbaceous"] = 72.0;
+  classes["Lichens"] = 73.0;
+  classes["Moss"] = 74.0;
+  classes["Pasture/Hay"] = 81.0;
+  classes["Cultivated Crops"] = 82.0;
+  classes["Woody Wetlands"] = 90.0;
+  classes["Wetlands Uknown1"] = 91.0;
+  classes["Wetlands Uknown2"] = 92.0;
+  classes["Wetlands Uknown3"] = 93.0;
+  classes["Wetlands Uknown4"] = 94.0;
+  classes["Emergent Herbaceous Wetlands"] = 95.0;
+
+  var setClass = function(className, value) {
+    return classes[className] + ";" + value;
+  };
+
+  reclass = []
+
+  reclass[0] = [setClass("Barren Land", 1), setClass("Developed; Open Space", 1), setClass("Lichens", 1),setClass("Moss", 1),setClass("Developed; Low Intensity", 1), setClass("Developed; Medium Intensity", 1)].join();
+
+  reclass[1] = [ setClass("Dwarf Scrub", 2), setClass("Scrub/Shrub", 2), setClass("Grassland/Herbaceous", 2),
+    setClass("Sedge/Herbaceous", 2), setClass("Woody Wetlands", 2) , setClass("Emergent Herbaceous Wetlands", 2),
+    setClass("Wetlands Uknown1", 2), setClass("Wetlands Uknown2", 2), setClass( "Wetlands Uknown3", 2),
+    setClass( "Wetlands Uknown4", 2), setClass("Pasture/Hay", 2), setClass("Cultivated Crops", 2) ].join();
+
+  reclass[2] = setClass("Forest Deciduous", 3)
+  reclass[3] = [ setClass("Forest Evergreen", 4), setClass("Mixed Forest" , 4) ].join()
+  reclass[4] =  setClass( "Developed High Intensity" , 5)
+
+  reclassString = reclass.join()
+
+  var layerName = "nlcd-zoom17";
+
+  new L.tileLayer("http://localhost:8085/tms/" + layerName + "/{z}/{x}/{y}.png?reclass=" + reclassString + "&colorMap=0:FFFFFF00;1:CF344D7F;2:34CF657F;3:9C84197f;4:EDE61A7f;5:ED7D1A7F").addTo(map);
+
+</script>
+</body>
+</html>
