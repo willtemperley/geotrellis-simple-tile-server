@@ -30,9 +30,10 @@ object Main {
     val sc = SparkUtils.createLocalSparkContext("local[1]", "tmp")
     val attributeStore = HadoopAttributeStore(path, sc.hadoopConfiguration)
     try {
-      HadoopValueReader(attributeStore)
+      HadoopValueReader(attributeStore)(sc)
     } finally {
       sc.stop()
     }
+    null
   }
 }

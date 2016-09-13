@@ -25,8 +25,8 @@ Revolver.settings
 fork := true
 
 libraryDependencies ++= Seq(
-  "com.azavea.geotrellis" %% "geotrellis-spark"         % "1.0.0-SNAPSHOT",
-  "com.azavea.geotrellis" %% "geotrellis-s3"            % "1.0.0-SNAPSHOT",
+  "com.azavea.geotrellis" %% "geotrellis-spark"         % "0.10.2",
+  "com.azavea.geotrellis" %% "geotrellis-s3"            % "0.10.2",
   "io.spray"              %% "spray-routing"            % "1.3.3",
   "io.spray"              %% "spray-caching"            % "1.3.3",
   "io.spray"              %% "spray-can"                % "1.3.3",
